@@ -1,11 +1,10 @@
-import React from 'react'
-import { Text, View, Image } from 'react-native'
+import React from 'react';
+import { Text, View, Image } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 
-export default class Welcome extends React.Component{
-
-    render(){
-        const { navigate } = this.props.navigation
-        return (
+export default function Welcome({ navigation }) {
+    return (
             <View style={{backgroundColor:"#EEF0F6", height:"100%"}}>
                 <Image source={require('../assets/images/masklogo.png')} 
                     style={{width:"70%", height:"30%", top:200, left:60 }}
@@ -15,7 +14,7 @@ export default class Welcome extends React.Component{
                 >Welcome, Lets get you started</Text>
 
                 <Text 
-                onPress={()=>navigate('Login')}
+                onPress={()=> navigation.navigate('Login')}
                 style={{
                     fontFamily: "Poppins-Regular",
                     position:"absolute",
@@ -33,7 +32,7 @@ export default class Welcome extends React.Component{
                     shadowColor: '#FFFFFF'
                 }}>Log In</Text>
                 <Text 
-                onPress={()=>navigate('Register')}
+                onPress={()=> navigation.navigate('Register')}
                 style={{
                     fontFamily: "Poppins-Regular",
                     position:"absolute",
@@ -52,5 +51,4 @@ export default class Welcome extends React.Component{
                 }}>Sign Up</Text>
             </View>
         )
-    }
 }

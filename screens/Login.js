@@ -25,7 +25,7 @@ export default class Login extends React.Component{
                 </View>
             </View>
             <Text 
-                onPress={()=>navigate('Welcome')}
+                onPress={()=>navigate('Onboarding')}
                 style={{...style.button,top:"80.49%",}}>Log In</Text>
         </View>               
     )

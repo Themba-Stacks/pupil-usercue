@@ -28,7 +28,7 @@ export default class Register extends React.Component{
                 </View>
             </View>
             <Text 
-                onPress={()=>navigate('Welcome')}
+                onPress={()=>navigate('Onboarding')}
                 style={{...style.button,top:"80.49%",}}>Sign Up</Text>
         </View>               
     )

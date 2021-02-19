@@ -1,29 +1,53 @@
-import { StatusBar } from 'expo-status-bar'
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import AppNavigator from './navigations/Navigator'
-import * as Font from 'expo-font'
-import  AppLoading  from 'expo-app-loading'
-import * as Location from 'expo-location'
+import * as React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import  { useFonts } from 'expo-font';
+import * as Location from 'expo-location';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import AppLoading from 'expo-app-loading';
+import Welcome from './screens/Welcome';
+import Register from './screens/Register'
+import Login from './screens/Login'
+import Home from './screens/Home';
+import OnboardingScreen from './screens/OnboardingScreen';
+import Updates from './screens/Updates';
+import CheckUps from './screens/CheckUps';
+import GHotspots from './screens/GHotspots';
+import LHotspots from './screens/LHotspots';
+import Exterminators from './screens/Exterminators';
+import Movements from './screens/Movements';
 
-export default class App extends React.Component {
-  state = {
-    isFontLoaded:false
-  }
+const Stack = createStackNavigator();
 
-  async componentDidMount(){
-    await Font.loadAsync({
+
+export default function App () {
+
+  let [fontsLoaded] = useFonts({
       'Poppins-Regular' : require('./assets/fonts/Poppins-Regular.ttf'),
       'Poppins-Bold' : require('./assets/fonts/Poppins-Bold.ttf')
     });
-    this.setState({isFontLoaded:true})
-  }
 
-  render(){
+  if (!fontsLoaded){
+    return < AppLoading />
+  } else {
   return (
-    (this.state.isFontLoaded === true) ? (< AppNavigator />) : (AppLoading)   
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Welcome" screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Welcome" component={Welcome} />
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} options={{title: 'Sign Up'}}/>
+        <Stack.Screen name="Onboarding" component={OnboardingScreen} />
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Updates" component={Updates} />
+        <Stack.Screen name="CheckUps" component={CheckUps} />
+        <Stack.Screen name="GHotspots" component={GHotspots} />
+        <Stack.Screen name="LHotspots" component={LHotspots} />
+        <Stack.Screen name="Exterminators" component={Exterminators} />
+        <Stack.Screen name="Movements" component={Movements} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
-}
+  }
 }
 
 const styles = StyleSheet.create({
